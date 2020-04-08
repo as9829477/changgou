@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.changgou.dao.BrandMapper">
+
+   <select id="selectBrand" resultType="Brand">
+      select * from tb_brand
+   </select>
+
+   <select id="findByBrand" parameterType="int" resultType="Brand">
+      select * from tb_brand where id=#{id}
+   </select>
+
+   <insert id="insertBrand" parameterType="Brand" >
+      <selectKey keyProperty="id" order="AFTER" resultType="Integer">
+         SELECT LAST_INSERT_ID()
+      </selectKey>
+      insert into tb_brand (name,image,letter,seq) values (#{name},#{image},#{letter},#{seq});
+   </insert>
+
+   <update id="updateBrand" parameterType="Brand" >
+      update tb_brand set name=#{name},image=#{image},letter=#{letter},seq=#{seq} where id=#{id};
+   </update>
+
+   <delete id="deleteBrand" parameterType="Integer">
+      delete from tb_brand where id=#{id};
+   </delete>
+
+   <select id="searchBrands" resultType="Brand">
+      select  * from tb_brand
+      <where>
+         <if test="name != null and name != '' ">
+            name like  concat('%',#{name},'%')
+         </if>
+         <if test="letter != null and letter != '' ">
+             or  letter like  concat('%',#{letter},'%')
+         </if>
+      </where>
+   </select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.changgou.dao.LogMapper">
+
+   <select id="findAll" resultType="Log">
+      select * from undo_log
+   </select>
+
+   <select id="findById" parameterType="Integer" resultType="Log">
+      select * from undo_log where id=#{id}
+   </select>
+
+   <insert id="add" parameterType="Log" >
+      <selectKey keyProperty="id" order="AFTER" resultType="Log">
+         SELECT LAST_INSERT_ID()
+      </selectKey>
+      insert into undo_log (branch_id,xid,rollback_info,log_status,log_created,log_modified,ext)
+      values (#{branchId},#{xid},#{rollbackInfo},#{logStatus},#{logCreated},#{logModified},#{ext});
+   </insert>
+
+   <update id="update" parameterType="Log" >
+      update undo_log set branch_id=#{branchId},xid=#{xid},rollback_info=#{rollbackInfo},log_status=#{logStatus},
+      log_created=#{logCreated} ,log_modified=#{logModified},ext=#{ext} where id=#{id};
+   </update>
+
+   <delete id="delete" parameterType="Integer">
+      delete from undo_log where id=#{id};
+   </delete>
+
+   <select id="findList" resultType="Log">
+      select  * from undo_log
+      <where>
+         <if test="xid != null and xid != '' ">
+            xid like  concat('%',#{xid},'%')
+         </if>
+         <if test="ext != null and ext != '' ">
+             or    ext like  concat('%',#{ext},'%')
+         </if>
+         <if test="logStatus != null and logStatus != '' ">
+            or  log_status = #{logStatus}
+         </if>
+
+      </where>
+   </select>
+</mapper>

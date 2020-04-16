@@ -8,7 +8,7 @@ public interface BrandMapper {
 
     public List<Brand> selectBrand();
 
-    public Brand findByBrand(int  id);
+    public Brand findByBrand(int id);
 
     public void insertBrand(Brand brand);
 

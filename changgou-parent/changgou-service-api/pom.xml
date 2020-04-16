@@ -12,6 +12,7 @@
     <modules>
         <module>changgou-service-goods-api</module>
     </modules>
+
     <artifactId>changgou-service-api</artifactId>
     <description>
         所有微服务工程API抽取（javaBean）

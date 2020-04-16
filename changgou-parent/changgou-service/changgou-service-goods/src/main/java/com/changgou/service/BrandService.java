@@ -9,7 +9,7 @@ public interface BrandService {
 
     public List<Brand> selectBrand();
 
-    public Brand findByBrand(int  id);
+    public Brand findByBrand(int id);
 
     public void insertBrand(Brand brand);
 
@@ -21,5 +21,5 @@ public interface BrandService {
 
     public PageInfo findPageBrands(int page, int size);
 
-    public PageInfo searchPageBrands(int page, int size,Brand brand);
+    public PageInfo searchPageBrands(int page, int size, Brand brand);
 }

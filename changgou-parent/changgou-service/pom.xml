@@ -11,7 +11,9 @@
     <packaging>pom</packaging>
     <modules>
         <module>changgou-service-goods</module>
+        <module>changgou-service-file</module>
     </modules>
+
     <artifactId>changgou-service</artifactId>
     <description>
         畅购商城各大微服务的父工程

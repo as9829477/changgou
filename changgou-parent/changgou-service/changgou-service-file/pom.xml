@@ -9,7 +9,15 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>changgou-service-goods</artifactId>
+    <artifactId>changgou-service-file</artifactId>
 
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/net.oschina.zcx7878/fastdfs-client-java -->
+        <dependency>
+            <groupId>net.oschina.zcx7878</groupId>
+            <artifactId>fastdfs-client-java</artifactId>
+            <version>1.27.0.0</version>
+        </dependency>
+    </dependencies>
 </project>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.changgou.dao.AlbumMapper">
+
+    <select id="findAll" resultType="Album">
+      select * from tb_album
+   </select>
+
+    <select id="findById" parameterType="Long" resultType="Album">
+      select * from tb_album where id=#{id}
+   </select>
+
+    <insert id="add" parameterType="Album" >
+        <selectKey keyProperty="id" order="AFTER" resultType="Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into tb_album (title,image,image_items) values (#{title},#{image},#{image_items});
+    </insert>
+
+    <update id="update" parameterType="Album" >
+      update tb_album set title=#{title},image=#{image},image_items=#{image_items} where id=#{id};
+   </update>
+
+    <delete id="delete" parameterType="Long">
+      delete from tb_album where id=#{id};
+   </delete>
+
+    <select id="findList" resultType="Album">
+        select  * from tb_album
+        <where>
+            <if test="title != null and title != '' ">
+                name like  concat('%',#{title},'%')
+            </if>
+            <if test="image != null and image != '' ">
+                or  letter like  concat('%',#{image},'%')
+            </if>
+            <if test="image_items != null and image_items != '' ">
+                or  letter like  concat('%',#{image_items},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>
